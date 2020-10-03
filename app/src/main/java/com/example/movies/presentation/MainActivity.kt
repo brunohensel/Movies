@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.example.movies.R
 import com.example.movies.viewmodel.MovieFailure
 import com.example.movies.viewmodel.MovieLoading
@@ -23,12 +22,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.state.observe(this, Observer { movieState ->
+        viewModel.state.observe(this) { movieState ->
             when (movieState) {
                 is MovieLoading -> Log.w("Loading", "Loading")
                 is MovieSuccess -> Log.w("Success", "${movieState.movies}")
                 is MovieFailure -> Log.e("Error", movieState.message)
             }
-        })
+        }
     }
 }

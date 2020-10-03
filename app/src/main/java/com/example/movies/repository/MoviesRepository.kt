@@ -10,9 +10,6 @@ import javax.inject.Singleton
 class MoviesRepository @Inject constructor(private val api: MoviesApi) {
 
     fun fetchMovies() =
-        flow {
-            api
-                .fetchMovies()
-                .map { emit(listOf(it)) }
-        }.flowOn(IO)
+        flow { emit(api.fetchMovies()) }
+            .flowOn(IO)
 }

@@ -5,7 +5,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.example.movies.repository.MoviesRepository
-import kotlinx.coroutines.Dispatchers.Main
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -18,7 +17,8 @@ class MoviesViewModel @ViewModelInject constructor(
     private val repository: MoviesRepository
 ) : ViewModel() {
 
-    val state: LiveData<MovieState> = liveData(Main) {
+    val state: LiveData<MovieState> =
+        liveData {
         repository
             .fetchMovies()
             .onStart { emit(MovieLoading) }
