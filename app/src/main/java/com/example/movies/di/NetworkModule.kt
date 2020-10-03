@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit
  * Component.
  *
  * object declaration is how kotlin declare a singleton*/
-private const val BASE_URL = "http://api.tvmaze.com"
+private const val BASE_URL = "https://api.tvmaze.com"
 
 @Module
 @InstallIn(ApplicationComponent::class)
