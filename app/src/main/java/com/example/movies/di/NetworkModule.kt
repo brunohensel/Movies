@@ -1,5 +1,6 @@
 package com.example.movies.di
 
+import com.example.movies.repository.MoviesApi
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeUnit
  *
  * object declaration is how kotlin declare a singleton*/
 private const val BASE_URL = "http://api.tvmaze.com"
+
 @Module
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
@@ -47,5 +49,10 @@ object NetworkModule {
             .baseUrl(BASE_URL)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    fun provideMoviesApi(retrofit: Retrofit): MoviesApi {
+        return retrofit.create(MoviesApi::class.java)
     }
 }
