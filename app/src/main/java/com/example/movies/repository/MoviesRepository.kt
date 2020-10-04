@@ -8,7 +8,7 @@ import javax.inject.Singleton
 
 @Singleton
 class MoviesRepository @Inject constructor(private val api: MoviesApi) {
-
+    /** flow {} builder function to construct arbitrary flows from sequential calls to emit function.*/
     fun fetchMovies() =
         flow { emit(api.fetchMovies()) }
             .flowOn(IO)

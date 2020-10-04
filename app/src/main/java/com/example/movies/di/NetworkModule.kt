@@ -10,6 +10,7 @@ import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
+import javax.inject.Singleton
 
 /** Hilt modules is needed when a type can not be constructor injected such as interfaces or types
  * that you not own.
@@ -23,13 +24,14 @@ private const val BASE_URL = "https://api.tvmaze.com"
 @InstallIn(ApplicationComponent::class)
 object NetworkModule {
 
+    @Singleton
     @Provides
     fun provideHttpLog(): HttpLoggingInterceptor {
         val log = HttpLoggingInterceptor()
         log.level = HttpLoggingInterceptor.Level.BODY
         return log
     }
-
+    @Singleton
     @Provides
     fun provideOkHttpClient(log: HttpLoggingInterceptor): OkHttpClient {
         return OkHttpClient.Builder()
@@ -41,7 +43,7 @@ object NetworkModule {
             .readTimeout(60, TimeUnit.SECONDS)
             .build()
     }
-
+    @Singleton
     @Provides
     fun provideRetrofit(client: OkHttpClient): Retrofit {
         return Retrofit.Builder()
@@ -50,7 +52,7 @@ object NetworkModule {
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
-
+    @Singleton
     @Provides
     fun provideMoviesApi(retrofit: Retrofit): MoviesApi {
         return retrofit.create(MoviesApi::class.java)
