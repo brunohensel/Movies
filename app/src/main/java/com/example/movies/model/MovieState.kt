@@ -1,6 +1,4 @@
-package com.example.movies.viewmodel
-
-import com.example.movies.model.MovieResponseDto
+package com.example.movies.model
 
 data class MovieState(
     val movies: List<MovieResponseDto>,

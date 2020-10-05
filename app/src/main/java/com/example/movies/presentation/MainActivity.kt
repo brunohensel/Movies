@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.movies.R
 import com.example.movies.common.ViewEventFlow
 import com.example.movies.model.MovieModelStore
+import com.example.movies.model.MovieSyncState
 import com.example.movies.viewmodel.MovieIntents
-import com.example.movies.viewmodel.MovieSyncState
 import com.example.movies.viewmodel.MoviesViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.*

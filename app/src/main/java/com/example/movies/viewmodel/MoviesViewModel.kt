@@ -6,6 +6,8 @@ import com.example.movies.common.Intent
 import com.example.movies.common.IntentFactory
 import com.example.movies.model.MovieModelStore
 import com.example.movies.model.MovieResponseDto
+import com.example.movies.model.MovieState
+import com.example.movies.model.MovieSyncState
 import com.example.movies.repository.MoviesRepository
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.Flow
