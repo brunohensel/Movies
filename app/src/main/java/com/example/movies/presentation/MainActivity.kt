@@ -41,13 +41,6 @@ class MainActivity : AppCompatActivity(), ViewEventFlow<MovieIntents> {
                 }
             }
             .launchIn(scope)
-/*        viewModel.state.observe(this) { movieState ->
-            when (movieState) {
-                is MovieLoading -> Log.w("Loading", "Loading")
-                is MovieSuccess -> Log.w("Success", "${movieState.movies}")
-                is MovieFailure -> Log.e("Error", movieState.message)
-            }
-        }*/
     }
 
     override fun onDestroy() {
