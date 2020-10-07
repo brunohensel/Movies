@@ -1,6 +1,6 @@
-package com.example.movies.repository
+package com.example.movies.data.repository
 
-import com.example.movies.model.MovieResponseDto
+import com.example.movies.domain.MovieResponseDto
 import retrofit2.http.GET
 
 interface MoviesApi {

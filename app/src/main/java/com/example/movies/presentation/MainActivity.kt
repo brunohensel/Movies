@@ -5,10 +5,8 @@ import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.movies.R
-import com.example.movies.model.MovieResponseDto
-import com.example.movies.presentation.viewmodel.MovieIntents
-import com.example.movies.presentation.viewmodel.MoviesViewModel
-import com.example.movies.repository.MovieState
+import com.example.movies.data.repository.MovieState
+import com.example.movies.domain.MovieResponseDto
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 

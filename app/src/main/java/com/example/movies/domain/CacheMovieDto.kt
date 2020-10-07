@@ -1,4 +1,4 @@
-package com.example.movies.room
+package com.example.movies.domain
 
 import androidx.annotation.Keep
 import androidx.room.ColumnInfo

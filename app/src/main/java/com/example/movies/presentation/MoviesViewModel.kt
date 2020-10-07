@@ -1,12 +1,12 @@
-package com.example.movies.presentation.viewmodel
+package com.example.movies.presentation
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.*
-import com.example.movies.model.MovieResponseDto
-import com.example.movies.presentation.viewmodel.MovieIntents.FetchMovies
-import com.example.movies.repository.MovieState
-import com.example.movies.repository.MoviesRepository
+import com.example.movies.data.repository.MovieState
+import com.example.movies.data.repository.MoviesRepository
+import com.example.movies.domain.MovieResponseDto
+import com.example.movies.presentation.MovieIntents.FetchMovies
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

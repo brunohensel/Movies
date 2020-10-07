@@ -1,4 +1,4 @@
-package com.example.movies.model
+package com.example.movies.domain
 
 import androidx.annotation.Keep
 /**Data class to be used to serialized the response from HTTP call*/

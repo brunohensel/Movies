@@ -1,7 +1,7 @@
-package com.example.movies.repository
+package com.example.movies.data.repository
 
-import com.example.movies.room.CacheMapper
-import com.example.movies.room.MovieDao
+import com.example.movies.data.room.CacheMapper
+import com.example.movies.data.room.MovieDao
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
 import javax.inject.Singleton

@@ -1,4 +1,4 @@
-package com.example.movies.repository
+package com.example.movies.data.repository
 
 sealed class MovieState<out R> {
     data class MovieSuccess<out T>(val data: T) : MovieState<T>()
