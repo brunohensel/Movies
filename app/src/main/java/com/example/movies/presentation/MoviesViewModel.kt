@@ -19,7 +19,7 @@ class MoviesViewModel @ViewModelInject constructor(
     private val repository: MoviesRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
-
+    
     private val _movieState: MutableLiveData<MovieState<List<MovieResponseDto>>> = MutableLiveData()
     val movieState: LiveData<MovieState<List<MovieResponseDto>>>
         get() = _movieState

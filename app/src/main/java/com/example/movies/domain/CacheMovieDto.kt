@@ -5,6 +5,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
+/**Each [@Entity] class represents a SQLite table.
+ * Every entity needs a primary key.
+ * [@ColumnInfo] Specifies the name of the column in the table*/
+
 @Keep
 @Entity(tableName = "movies")
 class CacheMovieDto(

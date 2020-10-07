@@ -6,6 +6,7 @@ import com.example.movies.domain.MovieResponseDto
 import com.example.movies.util.EntityMapper
 import javax.inject.Inject
 
+/**Mapper the cached object into the model object [MovieResponseDto]*/
 class CacheMapper @Inject constructor() : EntityMapper<CacheMovieDto, MovieResponseDto> {
 
     override fun mapFromEntity(entity: CacheMovieDto): MovieResponseDto =
