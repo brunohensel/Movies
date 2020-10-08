@@ -6,8 +6,8 @@ import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flattenMerge
-import kotlinx.coroutines.flow.single
 
 @ExperimentalCoroutinesApi
 open class FlowModelStore<S>(startingState: Flow<S>) : ModelStore<S> {
@@ -30,7 +30,7 @@ open class FlowModelStore<S>(startingState: Flow<S>) : ModelStore<S> {
              * Who subscribe to that state will get the initial state created by store. Then
              * when a first [intents] is received the reduce function will be called receiving
              * a old value and will generated a new one.*/
-                store.offer(intents.receive().reduce(store.value.single()))
+                store.offer(intents.receive().reduce(store.value.first()))
         }
     }
 
