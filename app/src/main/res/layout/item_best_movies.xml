@@ -8,13 +8,14 @@
     xmlns:tools="http://schemas.android.com/tools">
 
 
-    <com.google.android.material.imageview.ShapeableImageView
+    <ImageView
         android:id="@+id/imgBestMovie"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:scaleType="centerCrop"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
         android:layout_margin="8dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="@+id/tvBestMovieName"
+        app:layout_constraintStart_toStartOf="@+id/tvBestMovieName"
         app:layout_constraintTop_toTopOf="parent"
         tools:src="@drawable/ic_close" />
 
@@ -22,11 +23,13 @@
         android:id="@+id/tvBestMovieName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
         android:textAllCaps="false"
         android:textColor="#ececeb"
         android:textSize="12sp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintEnd_toEndOf="@+id/imgBestMovie"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgBestMovie"
         tools:text="The Hangover" />

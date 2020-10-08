@@ -9,8 +9,10 @@ import com.example.movies.R
 import com.example.movies.data.repository.MovieSyncState
 import com.example.movies.domain.MovieModelStore
 import com.example.movies.domain.MovieResponseDto
+import com.example.movies.presentation.adapter.BestMoviesAdapter
 import com.example.movies.reduce.ViewEventFlow
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_movie.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
@@ -24,6 +26,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
 
     private val viewModel: MoviesViewModel by viewModels()
     private val scope: CoroutineScope = MainScope()
+    private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +36,8 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
             .map { movieState ->
                 when (movieState.syncState) {
                     MovieSyncState.MovieLoading -> displayLoading(isLoading = true)
-                    MovieSyncState.MovieSuccess -> dislpayMovies(movieState.movies)
-                    is MovieSyncState.MovieFailure -> displayError(movieState.syncState.exception.message)
+                    MovieSyncState.MovieSuccess -> displayMovies(movieState.movies)
+                    is MovieSyncState.MovieFailure -> displayError(movieState.syncState)
                 }
             }
             .launchIn(scope)
@@ -42,23 +45,25 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        rvBestMovies.adapter = bestMovieAdapter
 
         viewEvents()
             .onEach { intents -> viewModel.process(intents) }
             .launchIn(scope)
     }
 
-    private fun displayError(message: String?) {
+    private fun displayError(message: MovieSyncState.MovieFailure) {
         displayLoading(isLoading = false)
-        Log.e("Error", message ?: "Unknown error")
+        Log.e("Error", message.exception.message ?: "Unknown error")
     }
 
     private fun displayLoading(isLoading: Boolean) {
         Log.w("Loading", "$isLoading")
     }
 
-    private fun dislpayMovies(movies: List<MovieResponseDto>) {
+    private fun displayMovies(movies: List<MovieResponseDto>) {
         displayLoading(isLoading = false)
+        bestMovieAdapter.submitList(movies)
         Log.w("Success", "$movies")
     }
 
