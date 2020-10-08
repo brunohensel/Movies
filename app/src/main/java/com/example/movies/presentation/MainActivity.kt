@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation.findNavController
 import com.example.movies.R
 import com.example.movies.data.repository.MovieState
 import com.example.movies.domain.MovieResponseDto
@@ -23,6 +24,9 @@ class MainActivity : AppCompatActivity() {
         subscribeObservers()
         viewModel.setStateIntent(MovieIntents.FetchMovies)
     }
+
+    override fun onSupportNavigateUp() =
+        findNavController(this, R.id.nav_host_fragment).navigateUp()
 
     private fun subscribeObservers() {
         viewModel.movieState.observe(this) { movieState ->
