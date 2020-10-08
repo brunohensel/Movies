@@ -1,8 +1,16 @@
 package com.example.movies.data.repository
 
-sealed class MovieState<out R> {
-    data class MovieSuccess<out T>(val data: T) : MovieState<T>()
-    data class MovieFailure(val exception: Exception) : MovieState<Nothing>()
-    object MovieLoading : MovieState<Nothing>()
+import com.example.movies.domain.MovieResponseDto
+
+data class MovieState(
+    val movies: List<MovieResponseDto>,
+    val syncState: MovieSyncState
+)
+
+sealed class MovieSyncState {
+    object MovieLoading : MovieSyncState()
+    object MovieIdle : MovieSyncState()
+    object MovieSuccess : MovieSyncState()
+    data class MovieFailure(val exception: Exception) : MovieSyncState()
 }
 
