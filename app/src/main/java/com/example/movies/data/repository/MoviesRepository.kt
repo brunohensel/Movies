@@ -19,7 +19,7 @@ class MoviesRepository @Inject constructor(
     private val cacheMapper: CacheMapper
 ) {
 
-     fun fetchMovie(): Intent<MovieState> {
+    fun fetchMovie(): Intent<MovieState> {
         return object : Intent<MovieState> {
             override fun reduce(oldState: MovieState): Flow<MovieState> =
                 flow {
@@ -40,20 +40,4 @@ class MoviesRepository @Inject constructor(
                 }.flowOn(IO)
         }
     }
-
-
-/*    */
-    /** flow {} builder function to construct arbitrary flows from sequential calls to emit function.*//*
-    suspend fun fetchMovies() =
-        flow {
-            emit(MovieState.MovieLoading)
-            try {
-                val moviesResponse = api.fetchMovies()
-                moviesResponse.forEach { movieDao.insert(cacheMapper.mapToEntity(it)) }
-                val cacheMovieDto = movieDao.get()
-                emit(MovieState.MovieSuccess(cacheMapper.mapFromEntityList(cacheMovieDto)))
-            } catch (e: Exception) {
-                emit(MovieState.MovieFailure(e))
-            }
-        }*/
 }

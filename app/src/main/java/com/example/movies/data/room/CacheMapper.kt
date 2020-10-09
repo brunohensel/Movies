@@ -2,6 +2,7 @@ package com.example.movies.data.room
 
 import com.example.movies.domain.CacheMovieDto
 import com.example.movies.domain.Image
+import com.example.movies.domain.MRating
 import com.example.movies.domain.MovieResponseDto
 import com.example.movies.util.EntityMapper
 import javax.inject.Inject
@@ -14,7 +15,10 @@ class CacheMapper @Inject constructor() : EntityMapper<CacheMovieDto, MovieRespo
             id = entity.id,
             image = Image(entity.image),
             language = entity.language,
-            name = entity.name
+            name = entity.name,
+            genres = entity.genres,
+            summary = entity.summary,
+            rating = MRating(entity.rating)
         )
 
     override fun mapToEntity(domainModel: MovieResponseDto): CacheMovieDto =
@@ -22,7 +26,10 @@ class CacheMapper @Inject constructor() : EntityMapper<CacheMovieDto, MovieRespo
             id = domainModel.id,
             image = domainModel.image.original,
             language = domainModel.language,
-            name = domainModel.name
+            name = domainModel.name,
+            genres = domainModel.genres,
+            summary = domainModel.summary,
+            rating = domainModel.rating.average
         )
 
     fun mapFromEntityList(entities: List<CacheMovieDto>): List<MovieResponseDto> =
