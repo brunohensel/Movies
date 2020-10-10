@@ -6,11 +6,12 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.movies.R
-import com.example.movies.data.repository.MovieSyncState
-import com.example.movies.domain.MovieModelStore
 import com.example.movies.domain.MovieResponseDto
+import com.example.movies.domain.movie.MovieModelStore
+import com.example.movies.domain.movie.MovieSyncState
 import com.example.movies.presentation.detailsFragment.DetailsFragment
 import com.example.movies.presentation.moviesFragment.movieAdapter.BestMoviesAdapter
 import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter
@@ -27,12 +28,13 @@ import kotlinx.coroutines.flow.*
 @FlowPreview
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewIntents> {
+class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<MovieViewIntents> {
 
     private val viewModel: MoviesViewModel by viewModels()
     private val scope: CoroutineScope = MainScope()
     private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter(::onBestMovieClick) }
     private val categoryMovieAdapter: MoviesCategoriesAdapter by lazy { MoviesCategoriesAdapter() }
+    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -76,15 +78,16 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
     }
 
     private fun onBestMovieClick(data: MovieResponseDto) {
+        val id = data.id
         findNavController().navigate(
             R.id.action_moviesFragment_to_detailsFragment,
-            bundleOf(DetailsFragment.MOVIE_DETAIL to data)
+            bundleOf(DetailsFragment.MOVIE_DETAIL to id)
         )
     }
 
-    override fun viewEvents(): Flow<ViewIntents> {
+    override fun viewEvents(): Flow<MovieViewIntents> {
         val flows = listOf(
-            ViewIntents.FetchMovies
+            MovieViewIntents.FetchMovies
         )
         return flows.asFlow()
     }

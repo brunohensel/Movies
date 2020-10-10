@@ -4,9 +4,9 @@ import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.movies.data.repository.MovieState
 import com.example.movies.data.repository.MoviesRepository
-import com.example.movies.domain.MovieModelStore
+import com.example.movies.domain.movie.MovieModelStore
+import com.example.movies.domain.movie.MovieState
 import com.example.movies.reduce.Intent
 import com.example.movies.reduce.IntentFactory
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -17,15 +17,15 @@ import javax.inject.Singleton
 class MoviesViewModel @ViewModelInject constructor(
     private val repository: MoviesRepository,
     @Assisted private val savedStateHandle: SavedStateHandle
-) : ViewModel(), IntentFactory<ViewIntents> {
+) : ViewModel(), IntentFactory<MovieViewIntents> {
 
-    override suspend fun process(viewEvent: ViewIntents) {
-        MovieModelStore.process(toState(viewEvent))
+    override suspend fun process(movieViewEvent: MovieViewIntents) {
+        MovieModelStore.process(toState(movieViewEvent))
     }
 
-    private fun toState(intents: ViewIntents): Intent<MovieState> {
-        return when (intents) {
-            ViewIntents.FetchMovies -> fetchMovie()
+    private fun toState(intentsMovie: MovieViewIntents): Intent<MovieState> {
+        return when (intentsMovie) {
+            MovieViewIntents.FetchMovies -> fetchMovie()
         }
     }
 

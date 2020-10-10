@@ -2,6 +2,9 @@ package com.example.movies.data.repository
 
 import com.example.movies.data.room.CacheMapper
 import com.example.movies.data.room.MovieDao
+import com.example.movies.domain.detail.DetailState
+import com.example.movies.domain.movie.MovieState
+import com.example.movies.domain.movie.MovieSyncState
 import com.example.movies.reduce.Intent
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -37,6 +40,22 @@ class MoviesRepository @Inject constructor(
                     } catch (e: Exception) {
                         emit(oldState.copy(syncState = MovieSyncState.MovieFailure(e)))
                     }
+                }.flowOn(IO)
+        }
+    }
+
+    fun fetchDetailFromLocal(id: Int): Intent<DetailState> {
+        return object : Intent<DetailState> {
+            override fun reduce(oldState: DetailState): Flow<DetailState> =
+                flow {
+                    emit(oldState.copy(syncState = MovieSyncState.MovieLoading))
+                    val cachedMovie = movieDao.getMovie(id)
+                    emit(
+                        oldState.copy(
+                            movie = cachedMovie,
+                            syncState = MovieSyncState.MovieSuccess
+                        )
+                    )
                 }.flowOn(IO)
         }
     }

@@ -4,7 +4,7 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.example.movies.domain.CacheMovieDto
+import com.example.movies.domain.movie.CacheMovieDto
 
 /**[Dao] means data access object.
  * In this interface the SQL queries will be specified and the method calls will be associated
@@ -18,4 +18,7 @@ interface MovieDao {
 
     @Query("SELECT * from movies")
     suspend fun get(): List<CacheMovieDto>
+
+    @Query("SELECT * from movies WHERE id = :id")
+    suspend fun getMovie(id: Int): CacheMovieDto
 }

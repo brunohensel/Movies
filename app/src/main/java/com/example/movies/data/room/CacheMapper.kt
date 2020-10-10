@@ -1,9 +1,9 @@
 package com.example.movies.data.room
 
-import com.example.movies.domain.CacheMovieDto
 import com.example.movies.domain.Image
 import com.example.movies.domain.MRating
 import com.example.movies.domain.MovieResponseDto
+import com.example.movies.domain.movie.CacheMovieDto
 import com.example.movies.util.EntityMapper
 import javax.inject.Inject
 

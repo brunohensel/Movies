@@ -1,7 +1,5 @@
-package com.example.movies.domain
+package com.example.movies.domain.movie
 
-import com.example.movies.data.repository.MovieState
-import com.example.movies.data.repository.MovieSyncState
 import com.example.movies.reduce.FlowModelStore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.flowOf

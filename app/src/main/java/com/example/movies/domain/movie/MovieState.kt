@@ -1,4 +1,4 @@
-package com.example.movies.data.repository
+package com.example.movies.domain.movie
 
 import com.example.movies.domain.MovieResponseDto
 

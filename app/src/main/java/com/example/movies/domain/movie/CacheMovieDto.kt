@@ -1,4 +1,4 @@
-package com.example.movies.domain
+package com.example.movies.domain.movie
 
 import androidx.annotation.Keep
 import androidx.room.ColumnInfo
@@ -38,7 +38,11 @@ data class CacheMovieDto(
 
     @ColumnInfo(name = "rating")
     val rating: Double
-)
+){
+    companion object{
+        val empty = CacheMovieDto(-1, "", "","", emptyList(), "", 0.0)
+    }
+}
 
 class Converters {
     @TypeConverter
