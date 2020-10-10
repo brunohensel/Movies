@@ -5,12 +5,13 @@ import android.util.Log
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.example.movies.R
 import com.example.movies.data.repository.MovieSyncState
 import com.example.movies.domain.MovieModelStore
 import com.example.movies.domain.MovieResponseDto
-import com.example.movies.presentation.adapter.BestMoviesAdapter
-import com.example.movies.presentation.adapter.MoviesCategoriesAdapter
+import com.example.movies.presentation.moviesFragment.movieAdapter.BestMoviesAdapter
+import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter
 import com.example.movies.reduce.ViewEventFlow
 import com.example.movies.util.MovieGenreMock
 import dagger.hilt.android.AndroidEntryPoint
@@ -28,7 +29,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
 
     private val viewModel: MoviesViewModel by viewModels()
     private val scope: CoroutineScope = MainScope()
-    private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter() }
+    private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter(::onBestMovieClick) }
     private val categoryMovieAdapter: MoviesCategoriesAdapter by lazy { MoviesCategoriesAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +55,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
         viewEvents()
             .onEach { intents -> viewModel.process(intents) }
             .launchIn(scope)
+
     }
 
     private fun displayError(message: MovieSyncState.MovieFailure) {
@@ -70,7 +72,9 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
         bestMovieAdapter.submitList(movies)
         categoryMovieAdapter.submitList(MovieGenreMock.arrayList)
     }
-
+    private fun onBestMovieClick(data: MovieResponseDto){
+        findNavController().navigate(R.id.action_moviesFragment_to_detailsFragment)
+    }
     override fun viewEvents(): Flow<ViewIntents> {
         val flows = listOf(
             ViewIntents.FetchMovies

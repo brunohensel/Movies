@@ -1,4 +1,4 @@
-package com.example.movies.presentation.adapter
+package com.example.movies.presentation.moviesFragment.movieAdapter
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -11,7 +11,7 @@ import com.example.movies.R
 import com.example.movies.domain.MovieResponseDto
 import kotlinx.android.synthetic.main.item_best_movies.view.*
 
-class BestMoviesAdapter :
+class BestMoviesAdapter(private val openDetail: ((MovieResponseDto) -> Unit)) :
     ListAdapter<MovieResponseDto, BestMoviesAdapter.BestMoviesViewHolder>(BestMoviesDiff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BestMoviesViewHolder {
@@ -21,14 +21,14 @@ class BestMoviesAdapter :
     }
 
     override fun onBindViewHolder(holderBest: BestMoviesViewHolder, position: Int) {
-        holderBest.bind(getItem(position))
+        holderBest.bind(getItem(position), openDetail)
     }
 
     inner class BestMoviesViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         @SuppressLint("UnsafeExperimentalUsageError")
-        fun bind(data: MovieResponseDto) {
+        fun bind(data: MovieResponseDto, openDetail: ((MovieResponseDto) -> Unit)) {
             with(itemView) {
-
+                ctnBestMovies.setOnClickListener { openDetail.invoke(data) }
                 tvBestMovieName.text = data.name
 
                 Glide
@@ -37,7 +37,6 @@ class BestMoviesAdapter :
                     .circleCrop()
                     .into(imgBestMovie)
             }
-
         }
     }
 }

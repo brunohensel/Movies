@@ -1,4 +1,4 @@
-package com.example.movies.presentation.adapter
+package com.example.movies.presentation.moviesFragment.movieAdapter
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
-import com.example.movies.presentation.adapter.MoviesCategoriesAdapter.MovieCategoriesViewHolder
+import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter.MovieCategoriesViewHolder
 import kotlinx.android.synthetic.main.item_categories.view.*
 
 class MoviesCategoriesAdapter :
