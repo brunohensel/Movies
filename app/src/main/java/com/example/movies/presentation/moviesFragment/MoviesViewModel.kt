@@ -1,4 +1,4 @@
-package com.example.movies.presentation
+package com.example.movies.presentation.moviesFragment
 
 import androidx.hilt.Assisted
 import androidx.hilt.lifecycle.ViewModelInject

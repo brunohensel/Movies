@@ -1,4 +1,4 @@
-package com.example.movies.presentation
+package com.example.movies.presentation.moviesFragment
 
 import android.os.Bundle
 import android.util.Log
