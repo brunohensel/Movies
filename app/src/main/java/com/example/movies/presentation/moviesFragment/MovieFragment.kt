@@ -3,6 +3,7 @@ package com.example.movies.presentation.moviesFragment
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -10,6 +11,7 @@ import com.example.movies.R
 import com.example.movies.data.repository.MovieSyncState
 import com.example.movies.domain.MovieModelStore
 import com.example.movies.domain.MovieResponseDto
+import com.example.movies.presentation.detailsFragment.DetailsFragment
 import com.example.movies.presentation.moviesFragment.movieAdapter.BestMoviesAdapter
 import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter
 import com.example.movies.reduce.ViewEventFlow
@@ -72,9 +74,14 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<ViewInten
         bestMovieAdapter.submitList(movies)
         categoryMovieAdapter.submitList(MovieGenreMock.arrayList)
     }
-    private fun onBestMovieClick(data: MovieResponseDto){
-        findNavController().navigate(R.id.action_moviesFragment_to_detailsFragment)
+
+    private fun onBestMovieClick(data: MovieResponseDto) {
+        findNavController().navigate(
+            R.id.action_moviesFragment_to_detailsFragment,
+            bundleOf(DetailsFragment.MOVIE_DETAIL to data)
+        )
     }
+
     override fun viewEvents(): Flow<ViewIntents> {
         val flows = listOf(
             ViewIntents.FetchMovies
