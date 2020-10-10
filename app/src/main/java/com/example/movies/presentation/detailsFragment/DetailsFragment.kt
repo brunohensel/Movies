@@ -2,7 +2,7 @@ package com.example.movies.presentation.detailsFragment
 
 import android.os.Bundle
 import android.text.Html
-import android.util.Log
+import android.text.method.ScrollingMovementMethod
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -30,7 +30,6 @@ class DetailsFragment : Fragment(R.layout.fragment_details), ViewEventFlow<Detai
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.getInt(MOVIE_DETAIL)?.let {
-            Log.i("ID", "$it")
             movieId = it
         }
 
@@ -64,10 +63,12 @@ class DetailsFragment : Fragment(R.layout.fragment_details), ViewEventFlow<Detai
     }
 
     private fun showMovieDetails(movie: CacheMovieDto) {
+        tvMovieDescription.movementMethod = ScrollingMovementMethod()
         tvMovieDescription.text = Html.fromHtml(movie.summary)
+        val rating = movie.rating.div(2)
+        ratingBar.rating = rating.toFloat()
         Glide.with(this)
             .load(movie.image)
-            .centerInside()
             .into(imgMovieDetail)
     }
 

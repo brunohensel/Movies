@@ -30,7 +30,7 @@ class MoviesRepository @Inject constructor(
                     try {
                         val moviesResponse = api.fetchMovies()
                         moviesResponse.forEach { movieDao.insert(cacheMapper.mapToEntity(it)) }
-                        val cacheMovieDto = movieDao.get()
+                        val cacheMovieDto = movieDao.get().sortedByDescending { it.rating }
                         emit(
                             oldState.copy(
                                 movies = cacheMapper.mapFromEntityList(cacheMovieDto),
