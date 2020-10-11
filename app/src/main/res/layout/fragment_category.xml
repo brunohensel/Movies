@@ -8,27 +8,18 @@
     android:background="#16192e"
     tools:context=".presentation.categoryFragment.CategoryFragment">
 
-    <TextView
-        android:id="@+id/tvCategoryName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#ececeb"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:layout_marginTop="24dp"
-        android:layout_marginStart="30dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="ACTION" />
-
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvMovieCategories"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:orientation="vertical"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="30dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginBottom="40dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/tvCategoryName"
-        app:layout_constraintTop_toBottomOf="@+id/tvCategoryName" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

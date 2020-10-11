@@ -38,6 +38,7 @@
         android:name="com.example.movies.presentation.detailsFragment.DetailsFragment"
         android:label="Shows details"
         tools:layout="@layout/fragment_details" />
+
     <fragment
         android:id="@+id/categoryFragment"
         android:name="com.example.movies.presentation.categoryFragment.CategoryFragment"

@@ -64,11 +64,11 @@ class MoviesRepository @Inject constructor(
         return object : Intent<CategoryState> {
             override fun reduce(oldState: CategoryState): Flow<CategoryState> =
                 flow {
-                    emit(oldState.copy(syncState = MovieSyncState.MovieLoading))
-                    val filteredMovie = movieDao.getMovies(listOf(category))
+                    val filteredMovie = movieDao.get().filter { it.genres.contains(category) }
                     emit(
-                        oldState.copy(
-                            movies = filteredMovie,
+                        //TODO figure it out how to handle side effects 
+                        CategoryState(
+                            movies = cacheMapper.mapFromEntityList(filteredMovie),
                             syncState = MovieSyncState.MovieSuccess
                         )
                     )
