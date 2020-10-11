@@ -7,60 +7,18 @@
     android:background="@color/colorPrimary"
     tools:context=".presentation.moviesFragment.MovieFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/rounded_corner"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <EditText
-            android:id="@+id/edtSearch"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toStartOf="@+id/imgCloseSearch"
-            app:layout_constraintStart_toEndOf="@+id/imageView"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_search"
-            app:layout_constraintBottom_toBottomOf="@+id/edtSearch"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/imgCloseSearch"
-            android:layout_width="15dp"
-            android:layout_height="15dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_close"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/edtSearch" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
     <TextView
         android:id="@+id/tvStarMovies"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="16dp"
         android:text="Best rated movies"
         android:textColor="#ececeb"
+        android:layout_marginStart="30dp"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvBestMovies"
@@ -82,7 +40,7 @@
         android:textColor="#ececeb"
         android:textSize="18sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/constraintLayout"
+        app:layout_constraintStart_toStartOf="@+id/tvStarMovies"
         app:layout_constraintTop_toBottomOf="@+id/rvBestMovies" />
 
 

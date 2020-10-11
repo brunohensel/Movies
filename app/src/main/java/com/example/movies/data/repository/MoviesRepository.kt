@@ -21,7 +21,6 @@ class MoviesRepository @Inject constructor(
     private val movieDao: MovieDao,
     private val cacheMapper: CacheMapper
 ) {
-
     fun fetchMovie(): Intent<MovieState> {
         return object : Intent<MovieState> {
             override fun reduce(oldState: MovieState): Flow<MovieState> =

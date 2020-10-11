@@ -6,7 +6,6 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.example.movies.R
 import com.example.movies.domain.MovieResponseDto
@@ -34,7 +33,6 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<MovieView
     private val scope: CoroutineScope = MainScope()
     private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter(::onBestMovieClick) }
     private val categoryMovieAdapter: MoviesCategoriesAdapter by lazy { MoviesCategoriesAdapter() }
-    private lateinit var navController: NavController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
