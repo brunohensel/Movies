@@ -11,6 +11,7 @@ import com.example.movies.R
 import com.example.movies.domain.MovieResponseDto
 import com.example.movies.domain.movie.MovieModelStore
 import com.example.movies.domain.movie.MovieSyncState
+import com.example.movies.presentation.categoryFragment.CategoryFragment
 import com.example.movies.presentation.detailsFragment.DetailsFragment
 import com.example.movies.presentation.moviesFragment.movieAdapter.BestMoviesAdapter
 import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter
@@ -32,7 +33,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<MovieView
     private val viewModel: MoviesViewModel by viewModels()
     private val scope: CoroutineScope = MainScope()
     private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter(::onBestMovieClick) }
-    private val categoryMovieAdapter: MoviesCategoriesAdapter by lazy { MoviesCategoriesAdapter() }
+    private val categoryMovieAdapter: MoviesCategoriesAdapter by lazy { MoviesCategoriesAdapter(::onCategoriesClick) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -80,6 +81,13 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<MovieView
         findNavController().navigate(
             R.id.action_moviesFragment_to_detailsFragment,
             bundleOf(DetailsFragment.MOVIE_DETAIL to id)
+        )
+    }
+
+    private fun onCategoriesClick(type: String) {
+        findNavController().navigate(
+            R.id.action_moviesFragment_to_categoryFragment,
+            bundleOf(CategoryFragment.MOVIE_CATEGORY to type)
         )
     }
 

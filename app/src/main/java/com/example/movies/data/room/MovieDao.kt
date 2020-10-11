@@ -21,4 +21,7 @@ interface MovieDao {
 
     @Query("SELECT * from movies WHERE id = :id")
     suspend fun getMovie(id: Int): CacheMovieDto
+
+    @Query("SELECT * from movies WHERE genres IN (:category)")
+    suspend fun getMovies(category: List<String>): List<CacheMovieDto>
 }

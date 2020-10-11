@@ -2,6 +2,7 @@ package com.example.movies.data.repository
 
 import com.example.movies.data.room.CacheMapper
 import com.example.movies.data.room.MovieDao
+import com.example.movies.domain.category.CategoryState
 import com.example.movies.domain.detail.DetailState
 import com.example.movies.domain.movie.MovieState
 import com.example.movies.domain.movie.MovieSyncState
@@ -52,6 +53,22 @@ class MoviesRepository @Inject constructor(
                     emit(
                         oldState.copy(
                             movie = cachedMovie,
+                            syncState = MovieSyncState.MovieSuccess
+                        )
+                    )
+                }.flowOn(IO)
+        }
+    }
+
+    fun fetchMoviesByCategory(category: String): Intent<CategoryState> {
+        return object : Intent<CategoryState> {
+            override fun reduce(oldState: CategoryState): Flow<CategoryState> =
+                flow {
+                    emit(oldState.copy(syncState = MovieSyncState.MovieLoading))
+                    val filteredMovie = movieDao.getMovies(listOf(category))
+                    emit(
+                        oldState.copy(
+                            movies = filteredMovie,
                             syncState = MovieSyncState.MovieSuccess
                         )
                     )

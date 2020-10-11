@@ -9,7 +9,7 @@ import com.example.movies.R
 import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter.MovieCategoriesViewHolder
 import kotlinx.android.synthetic.main.item_categories.view.*
 
-class MoviesCategoriesAdapter :
+class MoviesCategoriesAdapter(private val openCategory: ((String) -> Unit)) :
     ListAdapter<String, MovieCategoriesViewHolder>(MoviesCategoriesDiff()) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MovieCategoriesViewHolder {
@@ -19,14 +19,18 @@ class MoviesCategoriesAdapter :
     }
 
     override fun onBindViewHolder(holder: MovieCategoriesViewHolder, position: Int) {
-        holder.bind(getItem(position))
+        holder.bind(getItem(position), openCategory)
     }
 
     class MovieCategoriesViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
-        fun bind(type: String) {
+        fun bind(
+            type: String,
+            openCategory: (String) -> Unit
+        ) {
             with(itemView) {
-             tvMovieCategory.text = type
+                ctnCategoriesList.setOnClickListener { openCategory.invoke(type) }
+                tvMovieCategory.text = type
             }
         }
     }
