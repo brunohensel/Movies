@@ -66,7 +66,7 @@ class MoviesRepository @Inject constructor(
                 flow {
                     val filteredMovie = movieDao.get().filter { it.genres.contains(category) }
                     emit(
-                        //TODO figure it out how to handle side effects 
+                        //TODO figure it out how to handle side effects
                         CategoryState(
                             movies = cacheMapper.mapFromEntityList(filteredMovie),
                             syncState = MovieSyncState.MovieSuccess
