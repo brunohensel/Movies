@@ -19,8 +19,8 @@ class MoviesViewModel @ViewModelInject constructor(
     @Assisted private val savedStateHandle: SavedStateHandle
 ) : ViewModel(), IntentFactory<MovieViewIntents> {
 
-    override suspend fun process(movieViewEvent: MovieViewIntents) {
-        MovieModelStore.process(toState(movieViewEvent))
+    override suspend fun process(viewEvent: MovieViewIntents) {
+        MovieModelStore.process(toState(viewEvent))
     }
 
     private fun toState(intentsMovie: MovieViewIntents): Intent<MovieState> {

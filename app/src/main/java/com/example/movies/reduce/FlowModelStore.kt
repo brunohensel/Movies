@@ -5,7 +5,7 @@ import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.ConflatedBroadcastChannel
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.asFlow
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flattenMerge
 
@@ -19,8 +19,7 @@ open class FlowModelStore<S>(startingState: Flow<S>) : ModelStore<S> {
     private val scope = MainScope()
     private val intents = Channel<Intent<S>>()
 
-    //TODO replace the ConflatedBroadcastChannel for the new StateFlow
-    private val store = ConflatedBroadcastChannel(startingState)
+    private val store = MutableStateFlow(startingState)
 
     init {
         // Reduce from MainScope()
@@ -30,7 +29,7 @@ open class FlowModelStore<S>(startingState: Flow<S>) : ModelStore<S> {
              * Who subscribe to that state will get the initial state created by store. Then
              * when a first [intents] is received the reduce function will be called receiving
              * a old value and will generated a new one.*/
-                store.offer(intents.receive().reduce(store.value.first()))
+                store.value = (intents.receive().reduce(store.value.first()))
         }
     }
 
@@ -39,11 +38,10 @@ open class FlowModelStore<S>(startingState: Flow<S>) : ModelStore<S> {
     }
 
     @FlowPreview
-    override fun modelState(): Flow<S> = store.asFlow().flattenMerge()
+    override fun modelState(): Flow<S> = store.flattenMerge()
 
     fun close() {
         intents.close()
-        store.close()
         scope.cancel()
     }
 }
