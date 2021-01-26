@@ -8,11 +8,11 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.movies.R
-import com.example.movies.domain.MovieResponseDto
+import com.example.movies.domain.MovieDto
 import com.example.movies.presentation.categoryFragment.CategoryAdapter.CategoryAdapterViewHolder
 import kotlinx.android.synthetic.main.item_category.view.*
 
-class CategoryAdapter : ListAdapter<MovieResponseDto, CategoryAdapterViewHolder>(CategoryAdapter) {
+class CategoryAdapter : ListAdapter<MovieDto, CategoryAdapterViewHolder>(CategoryAdapter) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategoryAdapterViewHolder {
         return CategoryAdapterViewHolder(
@@ -25,7 +25,7 @@ class CategoryAdapter : ListAdapter<MovieResponseDto, CategoryAdapterViewHolder>
     }
 
     class CategoryAdapterViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        fun bind(data: MovieResponseDto) {
+        fun bind(data: MovieDto) {
             with(itemView) {
                 tvMovieTitle.text = data.name
 
@@ -37,17 +37,17 @@ class CategoryAdapter : ListAdapter<MovieResponseDto, CategoryAdapterViewHolder>
         }
     }
 
-    private companion object : DiffUtil.ItemCallback<MovieResponseDto>() {
+    private companion object : DiffUtil.ItemCallback<MovieDto>() {
         override fun areItemsTheSame(
-            oldItem: MovieResponseDto,
-            newItem: MovieResponseDto
+            oldItem: MovieDto,
+            newItem: MovieDto
         ): Boolean {
             return oldItem.id == newItem.id
         }
 
         override fun areContentsTheSame(
-            oldItem: MovieResponseDto,
-            newItem: MovieResponseDto
+            oldItem: MovieDto,
+            newItem: MovieDto
         ): Boolean {
             return oldItem == newItem
         }

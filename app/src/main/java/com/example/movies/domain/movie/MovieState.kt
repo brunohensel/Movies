@@ -1,9 +1,9 @@
 package com.example.movies.domain.movie
 
-import com.example.movies.domain.MovieResponseDto
+import com.example.movies.domain.MovieDto
 
 data class MovieState(
-    val movies: List<MovieResponseDto>,
+    val movies: List<MovieDto>,
     val syncState: MovieSyncState
 )
 

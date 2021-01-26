@@ -8,12 +8,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.movies.R
-import com.example.movies.domain.MovieResponseDto
+import com.example.movies.domain.MovieDto
 import com.example.movies.domain.movie.MovieModelStore
 import com.example.movies.domain.movie.MovieSyncState
 import com.example.movies.presentation.categoryFragment.CategoryFragment
 import com.example.movies.presentation.detailsFragment.DetailsFragment
-import com.example.movies.presentation.moviesFragment.movieAdapter.BestMoviesAdapter
+import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesAdapter
 import com.example.movies.presentation.moviesFragment.movieAdapter.MoviesCategoriesAdapter
 import com.example.movies.reduce.ViewEventFlow
 import com.example.movies.util.MovieGenreMock
@@ -32,7 +32,7 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<MovieView
 
     private val viewModel: MoviesViewModel by viewModels()
     private val scope: CoroutineScope = MainScope()
-    private val bestMovieAdapter: BestMoviesAdapter by lazy { BestMoviesAdapter(::onBestMovieClick) }
+    private val bestMovieAdapter: MoviesAdapter by lazy { MoviesAdapter(::onBestMovieClick) }
     private val categoryMovieAdapter: MoviesCategoriesAdapter by lazy { MoviesCategoriesAdapter(::onCategoriesClick) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -70,13 +70,13 @@ class MovieFragment : Fragment(R.layout.fragment_movie), ViewEventFlow<MovieView
         Log.w("Loading", "$isLoading")
     }
 
-    private fun displayMovies(movies: List<MovieResponseDto>) {
+    private fun displayMovies(movies: List<MovieDto>) {
         displayLoading(isLoading = false)
         bestMovieAdapter.submitList(movies)
         categoryMovieAdapter.submitList(MovieGenreMock.arrayList)
     }
 
-    private fun onBestMovieClick(data: MovieResponseDto) {
+    private fun onBestMovieClick(data: MovieDto) {
         val id = data.id
         findNavController().navigate(
             R.id.action_moviesFragment_to_detailsFragment,

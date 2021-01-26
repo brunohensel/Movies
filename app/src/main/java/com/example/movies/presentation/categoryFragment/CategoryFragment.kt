@@ -5,7 +5,7 @@ import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.movies.R
-import com.example.movies.domain.MovieResponseDto
+import com.example.movies.domain.MovieDto
 import com.example.movies.domain.category.CategoryModelStore
 import com.example.movies.domain.movie.MovieSyncState
 import com.example.movies.reduce.ViewEventFlow
@@ -49,7 +49,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category), ViewEventFlow<Cat
             .launchIn(scope)
     }
 
-    private fun showMovies(movies: List<MovieResponseDto>) {
+    private fun showMovies(movies: List<MovieDto>) {
         categoryAdapter.submitList(movies)
     }
 

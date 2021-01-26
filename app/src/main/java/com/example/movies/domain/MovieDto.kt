@@ -7,7 +7,7 @@ import kotlinx.android.parcel.Parcelize
 /**Data class to be used to serialized the response from HTTP call*/
 @Keep
 @Parcelize
-data class MovieResponseDto(
+data class MovieDto(
     val id: Int,
     val image: Image,
     val language: String,
